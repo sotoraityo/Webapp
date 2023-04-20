@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1> 目次</h1>
+
+<a href="/create" class="btn-lg btn-info" role="button">投稿する</a>
+
+<div class="container" style="width: 70%;">
+    {% for post in posts %}
+    <div class="card border-dark mb-3" style="max-width: 60rem;">
+      <h5 class="card-header">日付：{{ post.post_date.strftime('%Y/%m/%d %H:%M:%S') }}</h5>
+        
+      <div class="card-body">
+        <p class="card-text">記録者：{{post.user}}</p>
+        <a role="button" href="/detail/{{ post.id }}" class="btn-lg btn-secondary">詳細</a>
+      </div>
+      <form action="/passcheck/{{ post.id }}" method="POST">
+        <div align="right">
+          <button type="submit"  class="btn btn-primary">編集する</button>
+        </div>
+      </form>
+  
+    </div>
+    <p></p>
+    {% endfor %}
+
+</div>
+{% endblock %}

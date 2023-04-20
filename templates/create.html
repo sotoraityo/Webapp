@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>練習記録</h1>
+
+<div class="container">
+    <form action="/" method="POST">
+        <!-- <p>日付(date)の入力欄</p> -->
+        <p>日付：<input type="date" name="post_date" value="{{datenow.date()}}"></p>
+    
+        <!-- <p>名前(user)とタイトル(title)の入力欄</p> -->
+        <input class="form-control" name="user" type="text" placeholder="名前" aria-label="default input example">
+        <input class="form-control" name="weight" type="text" placeholder="体重" aria-label="default input example">
+        <input class="form-control" name="breakf" type="text" placeholder="朝食" aria-label="default input example">
+        <input class="form-control" name="lunch" type="text" placeholder="昼食" aria-label="default input example">
+        <input class="form-control" name="dinner" type="text" placeholder="夕食" aria-label="default input example">
+        <div style="display:inline-flex">
+            <p>健康状態　</p>
+            <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="radio" name="health" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">良</label>
+            </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="health" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">普</label>
+            </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="health" id="inlineRadio3" value="option3">
+            <label class="form-check-label" for="inlineRadio3">悪</label>
+            </div>
+        </div>
+        
+        <!-- <p>投稿内容(detail)三行に設定</p> -->
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">練習内容</label>
+            <textarea class="form-control"  name="detail" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        
+        <!-- <p>戻るボタンと投稿するボタン (hrefで’／’に戻ることを指定)<link rel="stylesheet" href="popup.css"></p> -->
+        <a href="/" class="btn btn-outline-success">戻る</a>
+        <button type="submit" class="btn btn-success">投稿する</button>
+    </form>
+
+</div>
+
+{% endblock %}
