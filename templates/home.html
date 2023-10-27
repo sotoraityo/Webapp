@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>ボタン集め</title>
+
+{% endblock %}
+
+{% block body %}
+<h1>ボタン集め</h1>
+    <!--URL集を並べる-->
+    <div align="center">
+        <div><a role="button" href="/calendar" class="btn btn-primary">カレンダー</a></div>
+        <div><a role="button" href="/index" class="btn btn-primary">目次</a></div>
+        <div><a role="button" href="/create" class="btn btn-primary">投稿作成</a></div>
+        <div><a role="button" href="/signup" class="btn btn-primary">ユーザー登録</a></div>
+        <div><a role="button" href="/login" class="btn btn-primary">ログイン</a></div>
+    </div>
+</div>
+{% endblock %}

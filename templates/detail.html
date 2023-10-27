@@ -6,33 +6,33 @@
 
 <div class="container">
   <!--元のスレッド-->  
-  <div class="card border-dark mb-3" style="max-width: 60rem;">
+  <div class="w-auto card border-dark mb-3" style="max-width: 60rem;">
         
     
-    <div class="card-header" style="background-color: orange;">日付：{{  post.post_date.strftime('%Y/%m/%d %H:%M:%S') }}　記録者：{{ post.user }}</div>
-      <div class="card-body text-dark">
+    <div class="card-header" style="background-color: orange;">日付：{{  post.post_date.strftime('%Y/%m/%d') }}　記録者：{{ post.user }}</div>
+      <div class="w-auto card-body text-dark">
         <!--
           <h5 class="card-title">タイトル：{{ post.title }}</h5>
         -->
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-secondary">　体重　</li>
-        <li class="list-group-item" style="min-width: 30rem;">{{ post.weight }}</li>
+      <ul class="w-auto list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-secondary"><nobr>　体重　</nobr></li>
+        <li class="w-auto list-group-item" style="min-width: 6rem;">{{ post.weight }}</li>
       </ul>
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-secondary">　朝食　</li>
-        <li class="list-group-item" style="min-width: 30rem;">{{ post.breakf }}</li>
+      <ul class="w-auto list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-secondary"><nobr>　朝食　</nobr></li>
+        <li class="w-auto list-group-item" style="min-width: 6rem;">{{ post.breakf }}</li>
       </ul>
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-secondary">　昼食　</li>
-        <li class="list-group-item" style="min-width: 30rem;">{{ post.lunch }}</li>
+      <ul class="w-auto list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-secondary"><nobr>　昼食　</nobr></li>
+        <li class="w-auto list-group-item" style="min-width: 6rem;">{{ post.lunch }}</li>
       </ul>
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-secondary">　夕食　</li>
-        <li class="list-group-item" style="min-width: 30rem;">{{ post.dinner }}</li>
+      <ul class="w-auto list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-secondary"><nobr>　夕食　</nobr></li>
+        <li class="w-auto list-group-item" style="min-width: 6rem;">{{ post.dinner }}</li>
       </ul>
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-secondary">練習内容</li>
-        <li class="list-group-item" style="min-width: 30rem;">{{ post.detail }}</li>
+      <ul class="w-auto list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-secondary"><nobr>練習内容</nobr></li>
+        <li class="w-auto list-group-item" style="min-width: 6rem;">{{ post.detail }}</li>
       </ul>
       </div>
     </div>
@@ -53,35 +53,35 @@
         <p>日付：<input type="date" name="post_date" value="{{datenow.date()}}"></p>
         <input class="form-control" name="user" type="text" placeholder="指導者名" aria-label="default input example">
         <div class="mb-2">
-            <label for="exampleFormControlTextarea1" class="form-label">フィードバック</label>
-            <textarea class="form-control"  name="detail" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <label for="exampleFormControlTextarea1" class="form-label">フィードバック</label>
+          <textarea class="form-control"  name="detail" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <!--
-         <パスワード>
-        <label for="inputPassword5" class="form-label">パスワード</label>
-        <input type="password" name="passward" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
-            ８文字以上２０字以内の半角英数字
-        </div>
-        -->
         <!-- 投稿するボタン -->
-        <button type="submit" class="btn btn-success">投稿する</button>
+        <div align="center">
+          <button type="submit" class="btn btn-success">投稿する</button>          
+        </div>
       </form>
     </div>
     
 
     <!--コメントするボタン-->
     <div align="center">
-      <input type="button" id="commentbutton" class="btn btn-primary" value="コメントする" onclick="test()">
+      <input type="button" id="commentbutton" class="btn btn-primary" value="コメントする" onclick="clickbutton()">
     </div>
     <!--戻るボタン-->
-    <a href="/" type="button" class="btn btn-secondary btn-lg">戻る</a>
-</div>
+    <a href="/index" type="button" class="btn btn-secondary btn-lg">(仮)</a>
+    <a href="#" type="button" class="btn btn-secondary btn-lg"  onclick="history.back(); return false;">戻る</a>
 
+    <!--編集するボタン-->
+    <div align="right">
+      <a role="button" href="/arrange/{{ post.id }}" class="btn btn-primary">編集する</a>
+    </div>
+</div>
+<!--コメントボタン　文字を変える-->
 <script>
   document.getElementById("commentform").style.display ="none";
 
-  function test(){
+  function clickbutton(){
     var form = document.getElementById("commentform");
     var button = document.getElementById("commentbutton");
 

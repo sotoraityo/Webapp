@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>画像アップ</h1>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    Send these files:<br />
+    <div> 
+        <input type="file" name="file_upload" accept=".png, .jpg, .jpeg">
+    </div>
+    <div>
+        <input type="file" name="csv_upload">
+    </div>
+    <input type="submit" value="アップロード">
+</form>
+
+{% endblock %}

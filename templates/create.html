@@ -1,47 +1,123 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" type="text/css">
+<link rel="stylesheet" href="{{url_for('static', filename='css/create.css')}}" type="text/css">
+{% endblock %}
+
+
 {% block body %}
-<h1>練習記録</h1>
+<h1>練習記録作成</h1>
 
 <div class="container">
-    <form action="/" method="POST">
-        <!-- <p>日付(date)の入力欄</p> -->
-        <p>日付：<input type="date" name="post_date" value="{{datenow.date()}}"></p>
-    
-        <!-- <p>名前(user)とタイトル(title)の入力欄</p> -->
-        <input class="form-control" name="user" type="text" placeholder="名前" aria-label="default input example">
-        <input class="form-control" name="weight" type="text" placeholder="体重" aria-label="default input example">
-        <input class="form-control" name="breakf" type="text" placeholder="朝食" aria-label="default input example">
-        <input class="form-control" name="lunch" type="text" placeholder="昼食" aria-label="default input example">
-        <input class="form-control" name="dinner" type="text" placeholder="夕食" aria-label="default input example">
-        <div style="display:inline-flex">
-            <p>健康状態　</p>
-            <div class="form-check form-check-inline" >
-            <input class="form-check-input" type="radio" name="health" id="inlineRadio1" value="option1">
-            <label class="form-check-label" for="inlineRadio1">良</label>
+    <form action="/createupload" method="POST">
+      
+      <!-- 日付が既にあるときのフラッシュメッセージ -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for category, message in messages %}
+            <div class="{{ category }}" style="color: white; background-color: red;">{{ message }}</div>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      <!-- <p>日付(date)の入力欄</p> -->
+      <p>日付：<input type="date" name="post_date" value="{{datenow.date()}}"></p>
+  
+      <!-- <p>名前(user)とタイトル(title)の入力欄</p> -->
+        <div class="formbox">
+            <div style="display:inline-flex">
+                <label for="user"><nobr>名前　</nobr></label>
+                <input class="form-control" name="user" type="text" placeholder="名前" style="max-width: 25rem;">
             </div>
-            <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="health" id="inlineRadio2" value="option2">
-            <label class="form-check-label" for="inlineRadio2">普</label>
+            <div style="display:inline-flex">
+                <label for="weight"><nobr>体重　</nobr></label>
+                <input class="form-control" name="weight" type="number" step="0.1" style="max-width: 25rem;" value="50.0" min="40.0" max="100.0">
+              
             </div>
-            <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="health" id="inlineRadio3" value="option3">
-            <label class="form-check-label" for="inlineRadio3">悪</label>
+            <div style="display:inline-flex">
+                <label for="breakf"><nobr>朝食　</nobr></label>
+                <input class="form-control" name="breakf" type="text" placeholder="朝食" style="max-width: 25rem;">
             </div>
-        </div>
-        
-        <!-- <p>投稿内容(detail)三行に設定</p> -->
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">練習内容</label>
-            <textarea class="form-control"  name="detail" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <div style="display:inline-flex">
+                <label for="lunch"><nobr>昼食　</nobr></label>
+                <input class="form-control" name="lunch" type="text" placeholder="昼食" style="max-width: 25rem;">
+            </div>
+            <div style="display:inline-flex">
+                <label for="dinner"><nobr>夕食　</nobr></label>
+                <input class="form-control" name="dinner" type="text" placeholder="夕食" style="max-width: 25rem;">
+            </div>
         </div>
 
-        
-        <!-- <p>戻るボタンと投稿するボタン (hrefで’／’に戻ることを指定)<link rel="stylesheet" href="popup.css"></p> -->
-        <a href="/" class="btn btn-outline-success">戻る</a>
-        <button type="submit" class="btn btn-success">投稿する</button>
+
+      <!-- <p>健康状態と体温・指標の入力欄</p> -->
+      <div style="display:inline-flex">
+          <p>健康状態　</p>
+          <div class="form-check form-check-inline" >
+          <input class="form-check-input" type="radio" name="health" id="Radio1" value="good">
+          <label class="form-check-label" for="inlineRadio1">良</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="health" id="Radio2" value="normal">
+          <label class="form-check-label" for="inlineRadio2">普</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="health" id="Radio3" value="bad">
+          <label class="form-check-label" for="inlineRadio3">悪</label>
+          </div>
+      </div>
+      <div>
+          <label>体温・指標</label>
+      </div>
+      
+      <ul>
+          <li style="display: flex;">
+              <label><nobr>起床時</nobr></label>
+              <input class="form-control" name="wake_temp" id="wake_tempe" type="number" step="0.1" style="max-width: 15rem;" value="36.0" min="0.0" max="45.0">
+              <input type="range" id="sihyo1" name="sihyo1" class="form-range" style="max-width: 15rem;" min="-5" max="5">
+              <div id="sihyovalue1" style="min-width: 10rem;">0</div>
+          </li>
+          <li style="display: flex;">
+              <label><nobr>練習前</nobr></label>
+              <input class="form-control" name="before_temp" id="before_temp" type="number" step="0.1" style="max-width: 15rem;" value="36.0" min="0.0" max="45.0">
+              <input type="range" id="sihyo2" name="sihyo2" class="form-range" style="max-width: 15rem;" min="-5" max="5">
+              <div id="sihyovalue2" style="min-width: 10rem;">0</div></li>
+          <li style="display: flex;">
+              <label><nobr>準備後</nobr></label>
+              <input class="form-control" name="warm_temp" id="warm_temp" type="number" step="0.1" style="max-width: 15rem;" value="36.0" min="0.0" max="45.0">
+              <input type="range" id="sihyo3" name="sihyo3" class="form-range" style="max-width: 15rem;" min="-5" max="5">
+              <div id="sihyovalue3" style="min-width: 10rem;">0</div>
+          </li>
+          <li style="display: flex;">
+              <label><nobr>練習後</nobr></label>
+              <input class="form-control" name="after_temp" id="after_temp" type="number" step="0.1" style="max-width: 15rem;" value="36.0" min="0.0" max="45.0">
+              <input type="range" id="sihyo4" name="sihyo4" class="form-range" style="max-width: 15rem;" min="-5" max="5">
+              <div id="sihyovalue4" style="min-width: 10rem;">0</div>
+          </li>
+          <li style="display: flex;">
+              <label><nobr>就寝時</nobr></label>
+              <input class="form-control" name="bed_temp" id="bed_temp" type="number" step="0.1" style="max-width: 15rem;" value="36.0" min="0.0" max="45.0">
+              <input type="range" id="sihyo5" name="sihyo5" class="form-range" style="max-width: 15rem;" min="-5" max="5">
+              <div id="sihyovalue5" style="min-width: 10rem;">0</div>
+          </li>
+      </ul>
+
+      <!-- <p>投稿内容(training)三行に設定</p> -->
+      <div class="mb-3">
+          <label for="training" class="form-label">練習内容</label>
+          <textarea class="form-control"  name="training" id="training" style="max-width: 50rem;" rows="3"></textarea>
+      </div>
+
+      
+      <!-- <p>戻るボタンと投稿するボタン (hrefで’／’に戻ることを指定)<link rel="stylesheet" href="popup.css"></p> -->
+      <a href="#" type="button" class="btn btn-secondary btn-lg"  onclick="history.back(); return false;">戻る</a>
+      <button type="submit" class="btn btn-success">投稿する</button>
     </form>
 
 </div>
+<!--指標の値を対応させるscriptで-->
+<script src="{{url_for('static', filename='javascript/createsihyo.js')}}"></script>
 
 {% endblock %}

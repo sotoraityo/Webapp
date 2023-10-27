@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>画像ページ</title>
+
+<style>
+    img {
+        max-width: 800px;
+        min-width: 200px;
+        max-height: 290px;
+        min-height: 200px;
+        width: auto;
+        height: auto;
+        }
+</style>
+{% endblock %}
+
+
+{% block body %}
+<h1>ファイルアップロード完了</h1>
+
+<p>{{filename}}</p>
+<div align="center">
+    <img src="{{url_for('static', filename='image/')+filename}}"> 
+</div>
+<p></p>
+<div align="center">
+    <img src="{{url_for('static', filename='image/graph/')+graphfile}}">
+</div>
+<p></p> 
+<div align="center">
+<!--戻るボタン-->
+    <a href="/upload" type="button" class="btn btn-secondary btn-lg">戻る</a>
+</div>
+{% endblock %}

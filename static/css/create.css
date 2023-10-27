@@ -1,0 +1,12 @@
+.formbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.container{
+    padding-left: 100px;
+}
+
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+}

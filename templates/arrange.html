@@ -17,7 +17,7 @@
             <textarea class="form-control"  name="detail" id="exampleFormControlTextarea1" rows="3">{{ post.detail }}</textarea>
         </div>
 
-        <!-- <p>パスワード(passward)</p> -->
+        <!-- <p>パスワード(passward)</p> 
         <label for="inputPassword5" class="form-label">パスワード</label>
         <p id="inner" style="color: red;"></p>
         <input type="password" name="passward" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
@@ -26,14 +26,17 @@
         </div>
         
         <div id="passlength" value="{{passlength}}"></div>
-
+        -->
 
         <!-- <p>戻るボタンと投稿するボタン (hrefで’／’に戻ることを指定)<link rel="stylesheet" href="popup.css"></p> -->
+        <a href="#" type="button" class="btn btn-secondary btn-lg"  onclick="history.back(); return false;">戻る</a>
         <a href="/delete/{{ post.id }}" class="btn btn-danger">削除する</a>
         <button type="submit" class="btn btn-success">編集完了する</button>
+
     </form>
 
 </div>
+<!--
 <script>
     let passvalue= document.getElementById("passlength");
     passvalue=passvalue.getAttribute("value");
@@ -44,5 +47,5 @@
       document.getElementById("inner").innerHTML ="パスワードが長すぎます"; 
     }
 </script>
-
+-->
 {% endblock %}
